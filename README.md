@@ -34,6 +34,12 @@ Use to install new packages. <br >
 or <br >
 `> jupyter notebook --port 9999`
 
+###
+In jupyter notebook
+Go to notebooks -> Demo-automation.ipynb
+kernel -> Restart & Clear Output
+cell -> Run all below
+
 #### Run manage_pip.py
 The use of `pip freeze > -l > requirements.txt` to update the packages has led to installation failure in some cases. <br >
 
