@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -12,11 +13,14 @@ from webdriver_manager.chrome import ChromeDriverManager
 import time
 import os, sys
 
+option = Options()
+option.add_experimental_option("detach", True)
+
 base_url = 'http://demo.oshinit.com/'
 
 def autoWebpage():
     try:
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=option)
         driver.maximize_window()
         driver.get(base_url)
         wait = WebDriverWait(driver, 10)
@@ -38,4 +42,6 @@ def autoWebpage():
         mortgage_rate.send_keys(Keys.ENTER)
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         time.sleep(20)
+        webpage = bs(driver.page_source, 'lxml')
+        print(webpage)
     except Exception as e: print(e)
